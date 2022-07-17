@@ -64,11 +64,12 @@ router.post(
             
             const { email, password } = await req.body
             const user = await User.findOne({ email })
-            const isMatchPassword = bcrypt.compareSync(password, user.password)
 
             if (!user) {
                 return res.status(400).json({ message: 'Введены некорректные данные при входе в систему' })
             }
+            
+            const isMatchPassword = bcrypt.compareSync(password, user.password)
 
             if (!isMatchPassword) {
                 return res.status(400).json({ message: 'Введены некорректные данные при входе в систему' })
